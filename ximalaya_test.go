@@ -7,3 +7,9 @@ func GetPodcast_test(t *testing.T){
 
 	t.Log(ximalayaPodcast.SoundIds)
 }
+
+func GetEpisode_test(t *testing.T){
+	ximalayaEpisode := GetEpisode("http://www.ximalaya.com/tracks/86846841.json")
+
+
+}
