@@ -1,17 +1,18 @@
 package lovepodcast_test
 
 import (
-	"github.com/billzhuang/lovepodcast"
 	"net/http"
 	"os"
 	"net/http/httptest"
+	"testing"
+	"github.com/billzhuang/lovepodcast"
 )
 
-func Entry_httpHandlers() {
+func Entry_httpHandlers(t *testing.T) {
 
 	httpHandler := func(w http.ResponseWriter, r *http.Request) {
 
-		cast := lovepodcast.Test()
+		cast :=  lovepodcast.Test()
 
 		// set the Content Type to that of XML
 		w.Header().Set("Content-Type", "application/xml")
@@ -23,6 +24,7 @@ func Entry_httpHandlers() {
 		// the Podcast entity as it also implements the io.Writer interface
 		// that complies with several middleware packages.
 		if err := cast.Encode(w); err != nil {
+			t.Error("error")
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
